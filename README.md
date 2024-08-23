@@ -1,6 +1,5 @@
 # MediStat
 
-![MediStat Logo](./public/logo.png) <!-- Replace with actual logo path if available -->
 
 MediStat is a web application designed to simplify the management of your health information. It enables patients to generate QR codes containing their complete medical history, which doctors can scan for quick access. The app also features smart reminders for prescriptions, secure data storage, and more.
 
@@ -12,11 +11,6 @@ MediStat is a web application designed to simplify the management of your health
 - **Health Insights**: Analyze health data over time to get insights into your well-being.
 - **Secure Storage**: All your health data is encrypted and securely stored.
 
-## Screenshots
-
-<!-- Include screenshots of the app if available -->
-![Landing Page](./public/screenshots/landing-page.png)
-![QR Code Generation](./public/screenshots/qrcode-generation.png)
 
 ## Tech Stack
 
