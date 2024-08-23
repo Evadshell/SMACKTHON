@@ -1,3 +1,30 @@
+# MediStat
+
+![MediStat Logo](./public/logo.png) <!-- Replace with actual logo path if available -->
+
+MediStat is a web application designed to simplify the management of your health information. It enables patients to generate QR codes containing their complete medical history, which doctors can scan for quick access. The app also features smart reminders for prescriptions, secure data storage, and more.
+
+## Features
+
+- **Instant QR Code Generation**: Register as a patient and get a QR code containing your complete medical history.
+- **Doctor's Assistant**: Doctors can scan the QR code to access your medical history instantly, eliminating the need for paper records.
+- **Smart Reminders**: Upload prescriptions, and the app will provide daily reminders for medications and dietary restrictions.
+- **Health Insights**: Analyze health data over time to get insights into your well-being.
+- **Secure Storage**: All your health data is encrypted and securely stored.
+
+## Screenshots
+
+<!-- Include screenshots of the app if available -->
+![Landing Page](./public/screenshots/landing-page.png)
+![QR Code Generation](./public/screenshots/qrcode-generation.png)
+
+## Tech Stack
+
+- **Frontend**: React, Next.js, Tailwind CSS
+- **UI Components**: Shadcn, React Spring
+- **Backend**: Node.js, Express 
+- **Database**: MongoDB 
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
