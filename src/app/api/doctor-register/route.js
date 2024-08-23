@@ -1,6 +1,6 @@
 import clientPromise from "../../lib/db";
 import { NextResponse } from 'next/server';
-
+import { getSession } from 'next-auth/react';
 export async function POST(req) {
     try {
         // Connect to MongoDB
@@ -10,7 +10,7 @@ export async function POST(req) {
 
         // Parse the incoming JSON request
         const body = await req.json();
-        const { email, name, dob, role, diseases } = body;
+        const { email,name, dob, role,experience, shop} = body;
         console.log(body);
 
         // Check for required fields
@@ -19,7 +19,7 @@ export async function POST(req) {
         }
 
         // Create a user object
-        const user = { email,name, dob, role,diseases };
+        const user = { email,name, dob, role,experience, shop};
 
       
 
