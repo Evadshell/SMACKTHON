@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { GoogleSignInButton } from "@/components/ui/authButtons";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useSpring, animated } from "react-spring";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button"; // Assuming you're using Shadcn's button component
@@ -69,20 +72,20 @@ const Landing = () => {
       content: "Your data is encrypted and stored securely.",
     },
   ];
+  const { data: session } = useSession();
+  const router = useRouter();
 
+  if (session) {
+    router.push("/home");
+  }
   return (
     <div>
          <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
         <nav className="bg-white shadow-md p-4">
           <div className="container mx-auto flex justify-between items-center">
             <h2 className="text-xl font-bold text-indigo-600">MediStat</h2>
-            {/* <Button
-        onClick={() => signIn("google")}
-        style={{ padding: "10px 20px", fontSize: "16px", cursor: "pointer" }}
-      >
-        Sign in
-      </Button> */}
-            {/* <SignInButton /> */}
+            <GoogleSignInButton />
+
           </div>
         </nav>
       {/* Header */}

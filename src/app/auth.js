@@ -1,7 +1,7 @@
 // import NextAuth from "next-auth";
 // import GoogleProvider from "next-auth/providers/google";
-// import { MongoDBAdapter } from "@auth/mongodb-adapter";
-// import clientPromise from "./lib/db";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import clientPromise from "./lib/db";
 
 // Define the NextAuth options
 // const options = {
@@ -48,4 +48,18 @@ export const authConfig = {
               clientSecret: process.env.AUTH_GOOGLE_SECRET,
             }),
           ],
+          adapter: MongoDBAdapter(clientPromise),
+  callbacks: {
+    async session({ session, user }) {
+      session.userId = user.id;
+      return session;
+    },
+    async signIn({ user }) {
+      if (!user.username) {
+        user.username = user?.email?.split("@")[0];
+      }
+      return true;
+    },
+  },
+  debug: true,
 }
