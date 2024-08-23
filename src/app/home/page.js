@@ -1,24 +1,21 @@
-// src/app/home.jsx
 "use client";
 
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { Button, useDisclosure } from "@chakra-ui/react";
-import RegisterModal from "@/components/RegisterModal";
+import { signOut } from "next-auth/react";
+import RegisterModal from "./RegisterModal";
 import axios from "axios";
+import { Button } from "../../../@/components/ui/button";
 const Home = () => {
   const { data: session, status } = useSession();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isOpen, setIsOpen] = useState(false);
   const [userRegistered, setUserRegistered] = useState(false); // Replace with actual registration check
 
   const handleRegistration = async (formData) => {
-    // Send formData to your backend to store in the database
-    const response = await axios.post("/api/register", {
-      data: formData,
-    });
+    const response = await axios.post("/api/patient-register", formData);
 
     if (response.status === 200) {
-      setUserRegistered(true); // Update registration status
+      setUserRegistered(true);
     }
   };
 
@@ -27,15 +24,21 @@ const Home = () => {
       {status === "authenticated" ? (
         userRegistered ? (
           <h1>Welcome, {session.user.name}!</h1>
-        ) : (
-          <Button onClick={onOpen}>Register your info</Button>
+        ) : (<>
+        
+        <Button onClick={() => setIsOpen(true)}>Update Details</Button>
+        <Button onClick={() => signOut()}>signout </Button>
+
+
+        
+        </>
         )
       ) : (
         <h1>Please log in</h1>
       )}
       <RegisterModal
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={() => setIsOpen(false)}
         onSubmit={handleRegistration}
       />
     </div>

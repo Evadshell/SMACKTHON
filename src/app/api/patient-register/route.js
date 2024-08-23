@@ -5,12 +5,12 @@ export async function POST(req) {
     try {
         // Connect to MongoDB
         const client = await clientPromise;
-        const db = client.db();
+        const db = client.db('medistat');
         const collection = db.collection("users");
 
         // Parse the incoming JSON request
         const body = await req.json();
-        const { name, dob, role, diseases, experience, shop } = body;
+        const { name, dob, role, diseases } = body;
         console.log(body);
 
         // Check for required fields
@@ -19,22 +19,9 @@ export async function POST(req) {
         }
 
         // Create a user object
-        const user = { name, dob, role };
+        const user = { name, dob, role,diseases };
 
-        // Handle additional fields based on the role
-        if (role === "patient") {
-            // Treat empty diseases as an empty array
-            user.diseases = diseases && diseases.length > 0 ? diseases : [];
-        } else if (role === "doctor") {
-            // Ensure experience and shop are provided
-            if (!experience || !shop) {
-                return NextResponse.json({ error: 'Experience and shop details are required for doctors' }, { status: 400 });
-            }
-            user.experience = experience;
-            user.shop = shop;
-        } else {
-            return NextResponse.json({ error: 'Invalid role specified' }, { status: 400 });
-        }
+      
 
         // Insert the user into the database
         await collection.insertOne(user);

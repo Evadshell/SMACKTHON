@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { GoogleSignInButton } from "@/components/ui/authButtons";
+import { GoogleSignInButton } from "../../@/components/ui/authButtons";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useSpring, animated } from "react-spring";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button"; // Assuming you're using Shadcn's button component
+import { Card, CardHeader, CardTitle, CardContent } from "../../@/components/ui/card";
+import { Button } from "../../@/components/ui/button"; // Assuming you're using Shadcn's button component
 // import { signIn } from "next-auth/react";
 // import { signOut, signIn, auth } from "./auth";
 
