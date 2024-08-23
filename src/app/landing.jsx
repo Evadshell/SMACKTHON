@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { useSpring, animated } from "react-spring";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button"; // Assuming you're using Shadcn's button component
+// import { signIn } from "next-auth/react";
+// import { signOut, signIn, auth } from "./auth";
 
 const InfoCard = ({ title, content, index }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -70,6 +72,19 @@ const Landing = () => {
 
   return (
     <div>
+         <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+        <nav className="bg-white shadow-md p-4">
+          <div className="container mx-auto flex justify-between items-center">
+            <h2 className="text-xl font-bold text-indigo-600">MediStat</h2>
+            {/* <Button
+        onClick={() => signIn("google")}
+        style={{ padding: "10px 20px", fontSize: "16px", cursor: "pointer" }}
+      >
+        Sign in
+      </Button> */}
+            {/* <SignInButton /> */}
+          </div>
+        </nav>
       {/* Header */}
       <header className="text-center text-white py-10 px-4">
         <h1 className="text-4xl lg:text-6xl font-bold">MediStat</h1>
@@ -83,6 +98,7 @@ const Landing = () => {
         ))}
       </section>
     </div>
+      </div>
   );
 };
 
