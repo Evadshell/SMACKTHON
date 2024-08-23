@@ -6,24 +6,26 @@ import { signOut } from "next-auth/react";
 import RegisterModal from "./RegisterModal";
 import axios from "axios";
 import { Button } from "../../../@/components/ui/button";
-
+import PatientHomePage from "./PatientHomePage";
+import DoctorHomePage from "./DoctorHomePage";
 const Home = () => {
   const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [userRegistered, setUserRegistered] = useState(false); // Will be fetched from server
   const [userData, setUserData] = useState(null); // Store user details here
-const [email,setEmail] = useState("");
+  const [email, setEmail] = useState("");
   // Fetch the user's registration details from the backend on page load
   useEffect(() => {
     const fetchUserDetails = async () => {
       if (session?.user?.email) {
-        console.log(session)
-        setEmail(session.user.email);    
+        console.log(session);
+        setEmail(session.user.email);
         try {
           // Fetch registration status based on user role
-          const response = await axios.get(`/api/user-details?email=${session?.user?.email}`);
+          const response = await axios.get(
+            `/api/user-details?email=${session?.user?.email}`
+          );
           console.log(response.data);
-
 
           if (response.status === 200 && response.data.isRegistered) {
             setUserRegistered(true);
@@ -65,25 +67,17 @@ const [email,setEmail] = useState("");
     }
   };
 
-
   return (
     <div>
       {status === "authenticated" ? (
         userData ? (
           <div className="user-details">
-            {/* Render user details in card format */}
-            <h1>Welcome, {userData?.name}!</h1>
-            <p>Date of Birth: {userData?.dob}</p>
-            <p>Role: {userData?.role}</p>
-            {userData?.role === "patient" ? (
-              <p>Diseases: {userData?.diseases}</p>
+            {userData?.role==="patient" ? (
+              <PatientHomePage />
             ) : (
-              <>
-                <p>Experience: {userData?.experience}</p>
-                <p>Shop: {userData?.shop}</p>
-              </>
+             <DoctorHomePage />
             )}
-            <Button onClick={() => signOut()}>Sign Out</Button>
+           
           </div>
         ) : (
           <>

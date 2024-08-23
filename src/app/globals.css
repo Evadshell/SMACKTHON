@@ -67,3 +67,8 @@
     @apply bg-background text-foreground;
   }
 }
+#reader {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
