@@ -1,27 +1,26 @@
-import dbConnect from '@/app/utils/dbConnect';
+import dbConnect from '../../utils/dbConnect';
 import ScanRequest from '../../models/ScanRequest';
-
-
-export default async function handler(req, res) {
+export async function POST(req) {
     await dbConnect();
 
-    if (req.method === 'POST') {
-        const { requestId, approved } = req.body;
+    const { requestId, approved } = await req.json();
 
-        try {
-            const scanRequest = await ScanRequest.findById(requestId);
-            if (!scanRequest) {
-                return res.status(404).json({ message: 'Request not found' });
-            }
-
-            scanRequest.status = approved ? 'approved' : 'denied';
-            await scanRequest.save();
-
-            res.status(200).json({ message: `Request ${approved ? 'approved' : 'denied'}` });
-        } catch (error) {
-            res.status(500).json({ message: 'Server Error', error });
+    try {
+        const scanRequest = await ScanRequest.findById(requestId);
+        if (!scanRequest) {
+            return new Response(JSON.stringify({ message: 'Request not found' }), { status: 404 });
         }
-    } else {
-        res.status(405).json({ message: 'Method not allowed' });
+
+        scanRequest.status = approved ? 'approved' : 'denied';
+        await scanRequest.save();
+
+        return new Response(JSON.stringify({ message: `Request ${approved ? 'approved' : 'denied'}` }), { status: 200 });
+    } catch (error) {
+        return new Response(JSON.stringify({ message: 'Server Error', error }), { status: 500 });
     }
+}
+
+// Handle other methods if needed
+export async function GET() {
+    return new Response(JSON.stringify({ message: 'Method not allowed' }), { status: 405 });
 }

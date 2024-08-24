@@ -1,23 +1,23 @@
-import dbConnect from '@/app/utils/dbConnect';
+import dbConnect from '../../utils/dbConnect';
 import Patient from '../../models/Patient';
-
-export default async function handler(req, res) {
+export async function GET(req) {
     await dbConnect();
 
-    if (req.method === 'GET') {
-        const { patientId } = req.query;
+    const { searchParams } = new URL(req.url);
+    const patientId = searchParams.get('patientId');
 
-        try {
-            const patient = await Patient.findById(patientId);
-            if (!patient) {
-                return res.status(404).json({ message: 'Patient not found' });
-            }
-
-            res.status(200).json(patient);
-        } catch (error) {
-            res.status(500).json({ message: 'Server Error', error });
+    try {
+        const patient = await Patient.findById(patientId);
+        if (!patient) {
+            return new Response(JSON.stringify({ message: 'Patient not found' }), { status: 404 });
         }
-    } else {
-        res.status(405).json({ message: 'Method not allowed' });
+
+        return new Response(JSON.stringify(patient), { status: 200 });
+    } catch (error) {
+        return new Response(JSON.stringify({ message: 'Server Error', error }), { status: 500 });
     }
+}
+
+export async function POST() {
+    return new Response(JSON.stringify({ message: 'Method not allowed' }), { status: 405 });
 }
