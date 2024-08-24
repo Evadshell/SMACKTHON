@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaQrcode, FaHistory, FaUser } from 'react-icons/fa';
 import PatientQrArea from './PatientQrArea';
+import PatientRequestPage from './PatientRequestPage';
 
 const PatientHomePage = () => {
     const [activeTab, setActiveTab] = useState(1);
@@ -13,7 +14,7 @@ const PatientHomePage = () => {
         <div className="flex flex-col h-screen justify-between">
             <div className="flex-grow p-4">
                 {activeTab === 1 && <div className="text-center"><PatientQrArea /></div>}
-                {activeTab === 2 && <div className="text-center">Content for History</div>}
+                {activeTab === 2 && <div className="text-center"><PatientRequestPage /></div>}
                 {activeTab === 3 && <div className="text-center">Content for Account</div>}
             </div>
             
