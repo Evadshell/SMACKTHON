@@ -22,6 +22,7 @@
     "framer-motion": "^11.3.30",
     "html5-qrcode": "^2.3.8",
     "mongodb": "^6.8.0",
+    "mongoose": "^8.5.4",
     "next": "14.2.6",
     "next-auth": "^4.24.7",
     "qrcode.react": "^3.1.0",

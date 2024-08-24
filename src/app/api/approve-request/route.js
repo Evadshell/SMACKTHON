@@ -1,5 +1,6 @@
-import dbConnect from '../../utils/dbConnect';
+import dbConnect from '@/app/utils/dbConnect';
 import ScanRequest from '../../models/ScanRequest';
+
 
 export default async function handler(req, res) {
     await dbConnect();
